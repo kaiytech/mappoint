@@ -18,14 +18,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp" app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintVertical_bias="0.084"/>
+                app:layout_constraintVertical_bias="0.0"/>
         <com.google.android.gms.maps.MapView
-                android:layout_width="421dp"
-                android:layout_height="680dp" android:id="@+id/mapView"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="32dp"
+                android:layout_width="420dp"
+                android:layout_height="660dp" android:id="@+id/mapView"
+                app:layout_constraintTop_toTopOf="@+id/textview_name"
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="1.0"
+                android:layout_marginTop="24dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

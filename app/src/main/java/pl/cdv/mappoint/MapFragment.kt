@@ -44,7 +44,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         mapView.getMapAsync(this)
 
 
-        val yourName = sharedPreferencesHelper.getNameFromSharedPreferences("your_name")
+        val yourName = sharedPreferencesHelper.getKeyFromSharedPreferences("your_name")
         val nameTextView = view.findViewById<TextView>(R.id.textview_name)
         nameTextView.text = "Hello, $yourName!"
     }

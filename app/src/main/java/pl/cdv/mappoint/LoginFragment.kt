@@ -32,7 +32,7 @@ class LoginFragment : Fragment() {
         loginButton.setOnClickListener {
             onLoginButtonClick(it)
         }
-        val yourName = sharedPreferencesHelper.getNameFromSharedPreferences("your_name")
+        val yourName = sharedPreferencesHelper.getKeyFromSharedPreferences("your_name")
         if (yourName != null) {
             if (yourName.isNotEmpty()) {
                 val navController = findNavController()
@@ -55,7 +55,7 @@ class LoginFragment : Fragment() {
         val enteredName = binding.inputName.text.toString()
 
         if (enteredName.isNotEmpty()) {
-            sharedPreferencesHelper.saveNameToSharedPreferences("your_name",enteredName)
+            sharedPreferencesHelper.saveKeyToSharedPreferences("your_name",enteredName)
 
             val navController = findNavController()
             navController.navigate(R.id.action_LoginFragment_to_MapFragment)

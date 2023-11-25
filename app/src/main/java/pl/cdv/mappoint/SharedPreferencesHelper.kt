@@ -8,14 +8,17 @@ class SharedPreferencesHelper(context: Context) {
         "MySharedPreferences",
         Context.MODE_PRIVATE
     )
-    fun saveNameToSharedPreferences(key:String,name: String) {
+    fun saveKeyToSharedPreferences(key:String,name: String) {
         with(sharedPreferences.edit()) {
             putString(key, name)
             apply()
         }
     }
 
-    fun getNameFromSharedPreferences(key:String): String? {
+    fun getKeyFromSharedPreferences(key:String): String? {
         return sharedPreferences.getString(key, "")
+    }
+    fun clearKeyFromSharedPreferences(key: String) {
+        sharedPreferences.edit().remove(key).apply()
     }
 }
