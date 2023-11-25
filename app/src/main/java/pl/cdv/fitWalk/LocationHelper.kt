@@ -42,7 +42,7 @@ class LocationHelper(private val fusedLocationClient: FusedLocationProviderClien
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
         )!!
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation))
+        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation))
     }
 
     @SuppressLint("MissingPermission")
@@ -66,7 +66,27 @@ class LocationHelper(private val fusedLocationClient: FusedLocationProviderClien
                 // Log.e(TAG, "Błąd podczas pobierania lokalizacji: ${e.message}")
             }
     }
+    @SuppressLint("MissingPermission")
 
+    fun getCurrentLocationAndSetCamera() {
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location: Location? ->
+                location?.let {
+                    val currentPosition = LatLng(it.latitude, it.longitude)
+                    userLocationMarker = googleMap.addMarker(MarkerOptions().position(currentPosition).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Your Position"))!!
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentPosition, 15f))
+
+                } ?: run {
+                    // Lokalizacja jest null, co może się zdarzyć w przypadku, gdy nie ma ostatniej lokalizacji.
+                    // Tutaj możesz obsłużyć to zdarzenie.
+                    // Log.e(TAG, "Ostatnia lokalizacja jest null")
+                }
+            }
+            .addOnFailureListener { e ->
+                // Błąd podczas pobierania lokalizacji.
+                // Log.e(TAG, "Błąd podczas pobierania lokalizacji: ${e.message}")
+            }
+    }
     private fun generateRandomMarkers(maxLat: Double, minLat: Double, maxLng: Double, minLng: Double) {
         val randomPoints = mutableListOf<LatLng>()
 

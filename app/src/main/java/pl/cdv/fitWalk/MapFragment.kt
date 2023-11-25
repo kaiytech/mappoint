@@ -47,6 +47,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         val yourName = sharedPreferencesHelper.getKeyFromSharedPreferences("your_name")
         val nameTextView = view.findViewById<TextView>(R.id.textview_name)
         nameTextView.text = "Hello, $yourName!"
+
+
+        binding.fab.setOnClickListener {
+            locationHelper.getCurrentLocationAndSetCamera()
+        }
     }
 
 
