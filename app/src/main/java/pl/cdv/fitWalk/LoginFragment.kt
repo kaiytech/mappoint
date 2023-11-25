@@ -1,4 +1,4 @@
-package pl.cdv.mappoint
+package pl.cdv.fitWalk
 
 import PermissionsHelper
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import pl.cdv.mappoint.databinding.LoginPageBinding
+import pl.cdv.fitWalk.databinding.LoginPageBinding
 class LoginFragment : Fragment() {
 
     private var _binding: LoginPageBinding? = null

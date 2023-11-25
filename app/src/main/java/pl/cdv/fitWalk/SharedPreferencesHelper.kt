@@ -1,4 +1,4 @@
-package pl.cdv.mappoint
+package pl.cdv.fitWalk
 
 import android.content.Context
 import android.content.SharedPreferences

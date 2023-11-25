@@ -9,7 +9,7 @@
             app:destination="@id/LoginFragment" />
     <fragment
             android:id="@+id/LoginFragment"
-            android:name="pl.cdv.mappoint.LoginFragment"
+            android:name="pl.cdv.fitWalk.LoginFragment"
             android:label="@string/login_fragment_label"
             tools:layout="@layout/login_page">
 
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
             android:id="@+id/MapFragment"
-            android:name="pl.cdv.mappoint.MapFragment"
+            android:name="pl.cdv.fitWalk.MapFragment"
             android:label="@string/map_fragment_label"
             tools:layout="@layout/map_page">
 

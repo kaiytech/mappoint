@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "pl.cdv.mappoint"
+    namespace = "pl.cdv.fitWalk"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "pl.cdv.mappoint"
+        applicationId = "pl.cdv.fitWalk"
         minSdk = 28
         targetSdk = 33
         versionCode = 1

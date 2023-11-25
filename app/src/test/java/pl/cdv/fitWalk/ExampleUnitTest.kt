@@ -1,4 +1,4 @@
-package pl.cdv.mappoint
+package pl.cdv.fitWalk
 
 import org.junit.Test
 

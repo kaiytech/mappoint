@@ -1,4 +1,4 @@
-package pl.cdv.mappoint
+package pl.cdv.fitWalk
 import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Looper

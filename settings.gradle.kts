@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MapPoint"
+rootProject.name = "fitWalk"
 include(":app")

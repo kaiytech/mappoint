@@ -22,14 +22,15 @@
                 android:onClick="onLoginButtonClick" app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginTop="30dp" android:textSize="34sp"/>
         <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="389dp"
+                android:layout_width="0dp"
                 android:layout_height="85dp"
                 android:id="@+id/input_name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" android:minHeight="48dp" android:hint="@string/input_login"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/button_login" android:layout_marginTop="250dp"
-                android:textSize="34sp" android:inputType="text|textPersonName|textAutoComplete"/>
+                app:layout_constraintBottom_toTopOf="@+id/button_login"
+                android:textSize="34sp" android:inputType="text|textPersonName|textAutoComplete"
+                android:layout_marginStart="8dp" android:layout_marginEnd="8dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,4 +1,4 @@
-package pl.cdv.mappoint
+package pl.cdv.fitWalk
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,6 +1,5 @@
-package pl.cdv.mappoint
+package pl.cdv.fitWalk
 
-import androidx.fragment.app.Fragment
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import pl.cdv.mappoint.databinding.ActivityMainBinding
+import pl.cdv.fitWalk.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

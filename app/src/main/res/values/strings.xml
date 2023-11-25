@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MapPoint</string>
+    <string name="app_name">FitWalk</string>
 
     <!-- menu -->
     <string name="action_settings">Settings</string>

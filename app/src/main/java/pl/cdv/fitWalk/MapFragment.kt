@@ -1,4 +1,4 @@
-package pl.cdv.mappoint
+package pl.cdv.fitWalk
 import PermissionsHelper
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import com.google.android.gms.location.*
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
-import pl.cdv.mappoint.databinding.MapPageBinding
+import pl.cdv.fitWalk.databinding.MapPageBinding
 
 class MapFragment : Fragment(), OnMapReadyCallback {
 
