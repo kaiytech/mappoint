@@ -1,5 +1,6 @@
 package pl.cdv.mappoint
 
+import android.content.Context
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +10,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import pl.cdv.mappoint.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -47,10 +47,26 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
+            R.id.action_logout -> {
+                // Obsługa akcji wylogowania
+                logout()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
+    private fun logout() {
 
+        val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("your_name")
+        editor.apply()
+
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        navController.navigate(R.id.action_global_LoginFragment)
+
+        return
+    }
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)

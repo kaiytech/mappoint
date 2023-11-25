@@ -1,5 +1,6 @@
 package pl.cdv.mappoint
 
+import PermissionsHelper
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,10 +13,10 @@ import pl.cdv.mappoint.databinding.LoginPageBinding
 class LoginFragment : Fragment() {
 
     private var _binding: LoginPageBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var sharedPreferencesHelper: SharedPreferencesHelper
+    private lateinit var permissionsHelper: PermissionsHelper
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -26,13 +27,22 @@ class LoginFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_LoginFragment_to_SecondFragment)
-        }
+        sharedPreferencesHelper = SharedPreferencesHelper(requireContext())
         val loginButton = view.findViewById<Button>(R.id.button_login)
         loginButton.setOnClickListener {
             onLoginButtonClick(it)
+        }
+        val yourName = sharedPreferencesHelper.getNameFromSharedPreferences("your_name")
+        if (yourName != null) {
+            if (yourName.isNotEmpty()) {
+                val navController = findNavController()
+                navController.navigate(R.id.action_LoginFragment_to_MapFragment)
+            }
+        }
+        permissionsHelper = PermissionsHelper(this)
+
+        if(!permissionsHelper.checkLocationPermission()){
+            permissionsHelper.requestLocationPermission()
         }
     }
 
@@ -41,24 +51,18 @@ class LoginFragment : Fragment() {
         _binding = null
     }
 
-    fun onLoginButtonClick(view: View) {
+    private fun onLoginButtonClick(view: View) {
         val enteredName = binding.inputName.text.toString()
 
-        // Sprawdź, czy imię nie jest puste
         if (enteredName.isNotEmpty()) {
-            // Przygotuj dane do przekazania do kolejnego fragmentu
-            val bundle = Bundle()
-            bundle.putString("your_name", enteredName)
+            sharedPreferencesHelper.saveNameToSharedPreferences("your_name",enteredName)
 
-            // Uzyskaj NavController
             val navController = findNavController()
-
-            // Przejdź do kolejnego fragmentu z przekazanymi danymi
-            navController.navigate(R.id.action_LoginFragment_to_SecondFragment, bundle)
+            navController.navigate(R.id.action_LoginFragment_to_MapFragment)
         } else {
-            // Imię jest puste, możesz obsłużyć to odpowiednią wiadomością lub działaniem
             Toast.makeText(requireContext(), "Wprowadź swoje imię", Toast.LENGTH_SHORT).show()
         }
     }
+
 
 }

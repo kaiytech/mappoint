@@ -4,7 +4,9 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/nav_graph"
             app:startDestination="@id/LoginFragment">
-
+    <action
+            android:id="@+id/action_global_LoginFragment"
+            app:destination="@id/LoginFragment" />
     <fragment
             android:id="@+id/LoginFragment"
             android:name="pl.cdv.mappoint.LoginFragment"
@@ -12,17 +14,17 @@
             tools:layout="@layout/login_page">
 
         <action
-                android:id="@+id/action_LoginFragment_to_SecondFragment"
-                app:destination="@id/SecondFragment"/>
+                android:id="@+id/action_LoginFragment_to_MapFragment"
+                app:destination="@id/MapFragment"/>
     </fragment>
     <fragment
-            android:id="@+id/SecondFragment"
-            android:name="pl.cdv.mappoint.SecondFragment"
-            android:label="@string/second_fragment_label"
-            tools:layout="@layout/fragment_second">
+            android:id="@+id/MapFragment"
+            android:name="pl.cdv.mappoint.MapFragment"
+            android:label="@string/map_fragment_label"
+            tools:layout="@layout/map_page">
 
         <action
-                android:id="@+id/action_SecondFragment_to_LoginFragment"
+                android:id="@+id/action_MapFragment_to_LoginFragment"
                 app:destination="@id/LoginFragment"/>
     </fragment>
 </navigation>
