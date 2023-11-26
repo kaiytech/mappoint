@@ -1,7 +1,9 @@
 package pl.cdv.fitWalk
 import android.annotation.SuppressLint
+import android.content.Context
 import android.location.Location
 import android.os.Looper
+import android.widget.TextView
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -10,13 +12,18 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-class LocationHelper(private val fusedLocationClient: FusedLocationProviderClient, private val googleMap: GoogleMap) {
+class LocationHelper(private val fusedLocationClient: FusedLocationProviderClient, private val googleMap: GoogleMap,context:Context,nameTextView: TextView) {
     private lateinit var userLocationMarker: Marker
+    private lateinit var gameHelper: GameHelper
+
+
+
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             for (location in locationResult.locations) {
                 val currentLocation = LatLng(location.latitude, location.longitude)
                 updateUserLocationMarker(currentLocation,location.bearing)
+                gameHelper.checkPointIsCollected(location, context, nameTextView)
             }
         }
     }
@@ -50,6 +57,8 @@ val cameraPosition= CameraPosition.Builder().target(currentLocation).zoom(15f).b
 
     @SuppressLint("MissingPermission")
     fun getCurrentLocationAndSetMarkers() {
+        gameHelper = GameHelper(googleMap)
+
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 location?.let {
@@ -61,7 +70,7 @@ val cameraPosition= CameraPosition.Builder().target(currentLocation).zoom(15f).b
                             .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.ic_menu_mylocation))
                             .rotation(it.bearing)
                     )!!
-                    generateRandomMarkers(it.latitude - 0.01, it.latitude + 0.01, it.longitude - 0.01, it.longitude + 0.01)
+                    gameHelper.generateRandomMarkers(it.latitude - 0.01, it.latitude + 0.01, it.longitude - 0.01, it.longitude + 0.01)
                 } ?: run {
                     // Lokalizacja jest null, co może się zdarzyć w przypadku, gdy nie ma ostatniej lokalizacji.
                     // Tutaj możesz obsłużyć to zdarzenie.
@@ -92,22 +101,5 @@ val cameraPosition= CameraPosition.Builder().target(currentLocation).zoom(15f).b
                 // Błąd podczas pobierania lokalizacji.
                 // Log.e(TAG, "Błąd podczas pobierania lokalizacji: ${e.message}")
             }
-    }
-    private fun generateRandomMarkers(maxLat: Double, minLat: Double, maxLng: Double, minLng: Double) {
-        val randomPoints = mutableListOf<LatLng>()
-
-        for (i in 0 until 10) {
-            val randomLat = (Math.random() * (maxLat - minLat)) + minLat
-            val randomLng = (Math.random() * (maxLng - minLng)) + minLng
-            val randomPoint = LatLng(randomLat, randomLng)
-            randomPoints.add(randomPoint)
-
-            googleMap.addMarker(
-                MarkerOptions()
-                    .position(randomPoint)
-                    .title("Random Point $i")
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-            )
-        }
     }
 }

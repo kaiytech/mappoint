@@ -8,9 +8,9 @@ class SharedPreferencesHelper(context: Context) {
         "MySharedPreferences",
         Context.MODE_PRIVATE
     )
-    fun saveKeyToSharedPreferences(key:String,name: String) {
+    fun saveKeyToSharedPreferences(key:String,value: String) {
         with(sharedPreferences.edit()) {
-            putString(key, name)
+            putString(key, value)
             apply()
         }
     }

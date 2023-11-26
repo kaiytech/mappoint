@@ -39,6 +39,9 @@ class LoginFragment : Fragment() {
                 navController.navigate(R.id.action_LoginFragment_to_MapFragment)
             }
         }
+
+
+
         permissionsHelper = PermissionsHelper(this)
 
         if(!permissionsHelper.checkLocationPermission()){

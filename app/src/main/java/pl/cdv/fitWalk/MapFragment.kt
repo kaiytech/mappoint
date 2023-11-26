@@ -23,7 +23,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var sharedPreferencesHelper: SharedPreferencesHelper
     private lateinit var permissionsHelper: PermissionsHelper
     private lateinit var locationHelper: LocationHelper
-
+    private lateinit var nameTextView: TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,6 +33,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        nameTextView = requireView().findViewById<TextView>(R.id.textview_name)
+
         super.onViewCreated(view, savedInstanceState)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -45,8 +47,17 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
 
         val yourName = sharedPreferencesHelper.getKeyFromSharedPreferences("your_name")
-        val nameTextView = view.findViewById<TextView>(R.id.textview_name)
-        nameTextView.text = "Hello, $yourName!"
+
+        var collectedPointsCount = sharedPreferencesHelper.getKeyFromSharedPreferences("collectedPointsCount")
+
+        if(collectedPointsCount==""){
+            collectedPointsCount = "0"
+            sharedPreferencesHelper.saveKeyToSharedPreferences("collectedPointsCount",collectedPointsCount)
+
+        }
+
+        collectedPointsCount = sharedPreferencesHelper.getKeyFromSharedPreferences("collectedPointsCount")
+        nameTextView.text = "Hello, $yourName! Your Points: $collectedPointsCount"
 
 
         binding.fab.setOnClickListener {
@@ -58,7 +69,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
-        locationHelper = LocationHelper(fusedLocationClient, googleMap)
+        locationHelper = LocationHelper(fusedLocationClient, googleMap,requireContext(),nameTextView)
         if(permissionsHelper.checkLocationPermission()){
             locationHelper.getCurrentLocationAndSetMarkers()
             locationHelper.startLocationUpdates()
