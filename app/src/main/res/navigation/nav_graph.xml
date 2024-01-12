@@ -20,11 +20,19 @@
     <fragment
             android:id="@+id/MapFragment"
             android:name="pl.cdv.fitWalk.MapFragment"
-            android:label="@string/map_fragment_label"
+
             tools:layout="@layout/map_page">
 
         <action
                 android:id="@+id/action_MapFragment_to_LoginFragment"
                 app:destination="@id/LoginFragment"/>
+        <action android:id="@+id/action_MapFragment_to_ListFragment2" app:destination="@id/ListFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/ListFragment"
+        android:name="pl.cdv.fitWalk.ListFragment"
+        tools:layout="@layout/list_page">
+        <action android:id="@+id/action_ListFragment_to_MapFragment" app:destination="@id/MapFragment"/>
     </fragment>
 </navigation>

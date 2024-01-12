@@ -7,16 +7,30 @@
         android:layout_height="match_parent"
         android:padding="16dp">
 
-    <TextView
-            android:id="@+id/textview_name"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:text=""
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+    <RelativeLayout
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintBottom_toTopOf="@id/mapView"
+            android:id="@+id/buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+    android:layout_marginTop="40dp">
+        <Button
+                android:id="@+id/points_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Test button"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentStart="true"/>
+
+        <Button
+                android:id="@+id/nearest_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:layout_centerHorizontal="true"
+                android:layout_toEndOf="@+id/points_button"
+                android:layout_marginLeft="30px"/>
+    </RelativeLayout>
 
     <com.google.android.gms.maps.MapView
             android:layout_width="match_parent"
@@ -25,7 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_name"/>
+            app:layout_constraintTop_toBottomOf="@+id/buttons"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -34,5 +48,7 @@
             android:layout_gravity="bottom|end"
             app:srcCompat="@android:drawable/ic_menu_mylocation"
             android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="16dp"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>

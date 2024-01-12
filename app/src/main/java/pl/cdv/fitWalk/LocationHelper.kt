@@ -3,6 +3,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import android.os.Looper
+import android.widget.Button
 import android.widget.TextView
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -12,11 +13,12 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-class LocationHelper(private val fusedLocationClient: FusedLocationProviderClient, private val googleMap: GoogleMap,context:Context,nameTextView: TextView) {
+class LocationHelper(private val fusedLocationClient: FusedLocationProviderClient, private val googleMap: GoogleMap,context:Context,nameTextView: Button, nearestButton: Button) {
     private lateinit var userLocationMarker: Marker
     private lateinit var gameHelper: GameHelper
 
 
+    private lateinit var cachedLocation: Location
 
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
@@ -24,6 +26,9 @@ class LocationHelper(private val fusedLocationClient: FusedLocationProviderClien
                 val currentLocation = LatLng(location.latitude, location.longitude)
                 updateUserLocationMarker(currentLocation,location.bearing)
                 gameHelper.checkPointIsCollected(location, context, nameTextView)
+                val txt = "Nearest: " + gameHelper.getDistanceToNearest(location).toInt() + " meters away"
+                nearestButton.text = txt
+                cachedLocation = location
             }
         }
     }
@@ -38,6 +43,10 @@ class LocationHelper(private val fusedLocationClient: FusedLocationProviderClien
             locationCallback,
             Looper.getMainLooper()
         )
+    }
+
+    public fun getAllPoints(): MutableList<String> {
+        return gameHelper.getAllPoints(cachedLocation)
     }
 
     fun updateUserLocationMarker(currentLocation: LatLng,bearing: Float) {
